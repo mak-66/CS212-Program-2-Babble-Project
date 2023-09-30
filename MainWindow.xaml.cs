@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.IO;
 using System.Collections;
 using System.Xml.Linq;
+using System.Linq.Expressions;
 
 namespace BabbleSample
 {
@@ -48,6 +49,7 @@ namespace BabbleSample
             }
         }
 
+
         private void analyzeInput(int order)
         {
             if (order > 0)
@@ -63,7 +65,8 @@ namespace BabbleSample
                 {
                     keyArray.Clear();
                     //takes the next order of words, joins them into a string, and turns them into the key
-                    for(int index = i; index < i + order; index++)
+                    //NOTE: I chose not to include the ending key (the key with no words after) because it simplifies some of the logic and is unnecessary.
+                    for(int index = i; index < (i + order)%words.Length; index++)
                     {
                         keyArray.Add(words[index]);
                     }
@@ -93,18 +96,27 @@ namespace BabbleSample
         }
 
         private void babbleButton_Click(object sender, RoutedEventArgs e)
-        {
-            Random seed = new Random();
-            //Initializes the textbox by clearing and printing the starter key
-            textBlock1.Text = String.Empty;
-            textBlock1.Text += starterKey;
-            string key = starterKey;
-
-            //Adds babble words to the textbox
-            for (int i = 0; i < wordCount-1; i++)
+        { 
+            if (orderComboBox.SelectedIndex == 0)
             {
-                int rand = seed.Next();
-                textBlock1.Text += " " + chooseWord(ref key, rand,ref i);
+                textBlock1.Text = "";
+                for (int i = 0; i < Math.Min(wordCount, words.Length); i++)
+                    textBlock1.Text += " " + words[i];
+            }
+            else
+            {
+                Random seed = new Random();
+                //Initializes the textbox by clearing and printing the starter key
+                textBlock1.Text = String.Empty;
+                textBlock1.Text += starterKey;
+                string key = starterKey;
+
+                //Adds babble words to the textbox
+                for (int i = 0; i < wordCount - 1; i++)
+                {
+                    int rand = seed.Next();
+                    textBlock1.Text += " " + chooseWord(ref key, rand, ref i);
+                }
             }
         }
 
@@ -118,12 +130,12 @@ namespace BabbleSample
         private string chooseWord(ref string key, int rand, ref int wordCount)
         {
             string word;
-            
+                               
             if (hashTable.ContainsKey(key))
             {
                 int elemNum = rand % hashTable[key].Count;
                 word = hashTable[key][elemNum];
-                key = updateKey(word, key);
+                key = updateKey(word, key);                
             }
             else
             {
@@ -133,7 +145,8 @@ namespace BabbleSample
                 key = starterKey;
                 wordCount -= (orderComboBox.SelectedIndex - 1);
             }
-                        
+
+
             return (word);
         }
 
@@ -148,7 +161,6 @@ namespace BabbleSample
             string newKey = string.Join(" ", currKeyArray);
             return (newKey);
         }
-
 
         private void orderComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
