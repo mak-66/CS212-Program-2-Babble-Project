@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS212 Babble", "CS212 Babble.csproj", "{7B785CDE-2F25-4C1D-AABD-BEE40AAEC57F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7B785CDE-2F25-4C1D-AABD-BEE40AAEC57F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B785CDE-2F25-4C1D-AABD-BEE40AAEC57F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B785CDE-2F25-4C1D-AABD-BEE40AAEC57F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B785CDE-2F25-4C1D-AABD-BEE40AAEC57F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AFD1956C-9A51-4C98-AC61-CABDDBD68F88}
+	EndGlobalSection
+EndGlobal
